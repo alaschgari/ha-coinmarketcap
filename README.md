@@ -1,7 +1,7 @@
 # CoinMarketCap Integration for Home Assistant
 
 <p align="center">
-  <img src="logo.png" alt="CoinMarketCap Logo" width="200" height="200">
+  <img src="https://raw.githubusercontent.com/alaschgari/hacs-coinmarketcap/main/logo.png" alt="CoinMarketCap Logo" width="200" height="200">
 </p>
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
