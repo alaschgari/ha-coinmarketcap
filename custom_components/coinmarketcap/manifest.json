@@ -1,6 +1,7 @@
 {
     "domain": "coinmarketcap",
     "name": "CoinMarketCap",
+    "description": "Track cryptocurrency prices and market metrics directly in Home Assistant.",
     "documentation": "https://github.com/alaschgari/hacs-coinmarketcap",
     "issue_tracker": "https://github.com/alaschgari/hacs-coinmarketcap/issues",
     "dependencies": [],
