@@ -7,13 +7,14 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 import homeassistant.helpers.config_validation as cv
 
-from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, API_URL
+from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, CONF_SCAN_INTERVAL, API_URL, DEFAULT_SCAN_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
 DATA_SCHEMA = vol.Schema({
     vol.Required(CONF_API_KEY): str,
     vol.Required(CONF_SYMBOLS, default="BTC,ETH"): str,
+    vol.Optional(CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL): vol.All(cv.positive_int, vol.Range(min=60)),
 })
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):

@@ -4,6 +4,7 @@ DOMAIN = "coinmarketcap"
 
 CONF_API_KEY = "api_key"
 CONF_SYMBOLS = "symbols"
+CONF_SCAN_INTERVAL = "scan_interval"
 
 DEFAULT_SCAN_INTERVAL = 300  # 5 minutes
 

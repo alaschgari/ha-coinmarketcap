@@ -8,7 +8,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, API_URL, DEFAULT_SCAN_INTERVAL
+from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, CONF_SCAN_INTERVAL, API_URL, DEFAULT_SCAN_INTERVAL
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -23,6 +23,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         session,
         api_key=entry.data[CONF_API_KEY],
         symbols=entry.data[CONF_SYMBOLS],
+        scan_interval=entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
     )
 
     await coordinator.async_config_entry_first_refresh()
@@ -45,7 +46,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 class CoinMarketCapDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching CoinMarketCap data."""
 
-    def __init__(self, hass, session, api_key, symbols):
+    def __init__(self, hass, session, api_key, symbols, scan_interval):
         """Initialize the coordinator."""
         self.session = session
         self.api_key = api_key
@@ -55,7 +56,7 @@ class CoinMarketCapDataUpdateCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             name=DOMAIN,
-            update_interval=timedelta(seconds=DEFAULT_SCAN_INTERVAL),
+            update_interval=timedelta(seconds=scan_interval),
         )
 
     async def _async_update_data(self):

@@ -5,7 +5,8 @@
                 "title": "CoinMarketCap Configuration",
                 "data": {
                     "api_key": "API Key",
-                    "symbols": "Cryptocurrency Symbols (e.g., BTC,ETH,SOL)"
+                    "symbols": "Cryptocurrency Symbols (e.g., BTC,ETH,SOL)",
+                    "scan_interval": "Update Interval (in seconds, min 60)"
                 }
             }
         },
