@@ -7,6 +7,12 @@
                     "api_key": "API Key",
                     "symbols": "Cryptocurrency Symbols (e.g., BTC,ETH,SOL)",
                     "scan_interval": "Update Interval (in seconds, min 60)"
+                },
+                "description": "Enter your CoinMarketCap API credentials and preferences.",
+                "data_description": {
+                    "api_key": "Get your key from pro.coinmarketcap.com",
+                    "symbols": "Examples: BTC, ETH, SOL, DOGE",
+                    "scan_interval": "Default is 300 seconds (5 minutes)"
                 }
             }
         },
