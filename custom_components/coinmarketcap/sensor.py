@@ -21,9 +21,9 @@ async def async_setup_entry(hass, entry, async_add_entities):
             if sensor_type in SENSOR_TYPES and SENSOR_TYPES[sensor_type]["category"] == "symbol":
                 entities.append(CoinMarketCapSensor(coordinator, symbol, sensor_type))
     
-    # Add global and fear_greed sensors (these don't depend on a specific symbol)
+    # Add global, fear_greed and key_info sensors (these don't depend on a specific symbol)
     for sensor_type in enabled_sensors:
-        if sensor_type in SENSOR_TYPES and SENSOR_TYPES[sensor_type]["category"] in ["global", "fear_greed"]:
+        if sensor_type in SENSOR_TYPES and SENSOR_TYPES[sensor_type]["category"] in ["global", "fear_greed", "key_info"]:
             entities.append(CoinMarketCapSensor(coordinator, None, sensor_type))
         
     async_add_entities(entities)
@@ -72,6 +72,8 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
             data = self.coordinator.data.get('global')
         elif category == "fear_greed":
             data = self.coordinator.data.get('fear_greed')
+        elif category == "key_info":
+            data = self.coordinator.data.get('key_info')
         else:
             data = None
 
@@ -124,4 +126,10 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
                 return {
                     "last_updated": data.get('last_updated'),
                 }
+        elif category == "key_info":
+            data = self.coordinator.data.get('key_info', {})
+            return {
+                "plan_name": data.get('plan', {}).get('name'),
+                "rate_limit_minute": data.get('plan', {}).get('rate_limit_minute')
+            }
         return None

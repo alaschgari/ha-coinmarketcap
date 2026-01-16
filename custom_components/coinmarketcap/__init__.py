@@ -18,6 +18,7 @@ from .const import (
     API_URL, 
     GLOBAL_API_URL,
     FEAR_GREED_API_URL,
+    KEY_INFO_API_URL,
     DEFAULT_SCAN_INTERVAL, 
     DEFAULT_DECIMALS
 )
@@ -116,6 +117,7 @@ class CoinMarketCapDataUpdateCoordinator(DataUpdateCoordinator):
             fetch_url(API_URL, params_quotes),
             fetch_url(GLOBAL_API_URL),
             fetch_url(FEAR_GREED_API_URL),
+            fetch_url(KEY_INFO_API_URL),
             return_exceptions=True
         )
 
@@ -130,13 +132,17 @@ class CoinMarketCapDataUpdateCoordinator(DataUpdateCoordinator):
             final_data['global'] = results[1]['data']
 
         # Process Fear & Greed
-        if results[2] and 'data' in results[2]:
+        if len(results) > 2 and results[2] and 'data' in results[2]:
             fg_list = results[2]['data']
             if fg_list and isinstance(fg_list, list):
                 final_data['fear_greed'] = fg_list[0]
             elif isinstance(fg_list, dict):
                 # Backup in case API format changes
                 final_data['fear_greed'] = fg_list
+
+        # Process Key Info (API Credits)
+        if len(results) > 3 and results[3] and 'data' in results[3]:
+            final_data['key_info'] = results[3]['data']
 
         if not final_data:
             raise UpdateFailed("Failed to fetch any data from CoinMarketCap")

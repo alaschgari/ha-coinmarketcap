@@ -16,6 +16,7 @@ DEFAULT_SENSORS = ["price", "percent_change_24h"]
 API_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
 GLOBAL_API_URL = "https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest"
 FEAR_GREED_API_URL = "https://pro-api.coinmarketcap.com/v3/fear-and-greed/latest"
+KEY_INFO_API_URL = "https://pro-api.coinmarketcap.com/v1/key/info"
 
 SENSOR_TYPES = {
     # Cryptocurrency Symbols
@@ -155,5 +156,35 @@ SENSOR_TYPES = {
         "unit": None,
         "icon": "mdi:label",
         "category": "fear_greed"
+    },
+    
+    # API Usage (Key Info)
+    "credits_used_day": {
+        "name": "Credits Used Today",
+        "json_path": ["usage", "current_day", "credits_used"],
+        "unit": "Credits",
+        "icon": "mdi:api",
+        "category": "key_info"
+    },
+    "credits_left_day": {
+        "name": "Credits Left Today",
+        "json_path": ["usage", "current_day", "credits_left"],
+        "unit": "Credits",
+        "icon": "mdi:api-off",
+        "category": "key_info"
+    },
+    "credits_used_month": {
+        "name": "Credits Used Month",
+        "json_path": ["usage", "current_month", "credits_used"],
+        "unit": "Credits",
+        "icon": "mdi:calendar-check",
+        "category": "key_info"
+    },
+    "credits_left_month": {
+        "name": "Credits Left Month",
+        "json_path": ["usage", "current_month", "credits_left"],
+        "unit": "Credits",
+        "icon": "mdi:calendar-remove",
+        "category": "key_info"
     }
 }
