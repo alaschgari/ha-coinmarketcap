@@ -1,0 +1,21 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "CoinMarketCap Configuration",
+                "data": {
+                    "api_key": "API Key",
+                    "symbols": "Cryptocurrency Symbols (e.g., BTC,ETH,SOL)"
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Failed to connect to CoinMarketCap API",
+            "invalid_auth": "Invalid API Key",
+            "unknown": "Unexpected error"
+        },
+        "abort": {
+            "already_configured": "Device is already configured"
+        }
+    }
+}
