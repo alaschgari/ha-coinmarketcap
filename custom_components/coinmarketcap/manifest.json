@@ -1,13 +1,13 @@
 {
     "domain": "coinmarketcap",
     "name": "CoinMarketCap",
-    "documentation": "https://github.com/marketingteamberlin/hacs-coinmarketcap",
-    "issue_tracker": "https://github.com/marketingteamberlin/hacs-coinmarketcap/issues",
+    "documentation": "https://github.com/alaschgari/hacs-coinmarketcap",
+    "issue_tracker": "https://github.com/alaschgari/hacs-coinmarketcap/issues",
     "dependencies": [],
     "codeowners": [
-        "@marketingteamberlin"
+        "@alaschgari"
     ],
     "config_flow": true,
     "iot_class": "cloud_polling",
-    "version": "1.1.0"
+    "version": "1.1.1"
 }

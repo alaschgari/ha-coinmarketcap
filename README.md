@@ -12,7 +12,7 @@ This custom integration for Home Assistant allows you to track cryptocurrency pr
 1. Open HACS in your Home Assistant instance.
 2. Click on "Integrations".
 3. Click the three dots in the upper right corner and select "Custom repositories".
-4. Add the URL of this repository and select "Integration" as the category.
+4. Add the URL of this repository (`https://github.com/alaschgari/hacs-coinmarketcap`) and select "Integration" as the category.
 5. Click "Add" and then install the "CoinMarketCap" integration.
 6. Restart Home Assistant.
 
