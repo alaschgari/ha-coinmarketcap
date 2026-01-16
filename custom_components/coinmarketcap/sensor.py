@@ -3,16 +3,21 @@ from homeassistant.components.sensor import SensorEntity
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN
+from .const import DOMAIN, SENSOR_TYPES, CONF_SHOW_SENSORS, DEFAULT_SENSORS
 
 async def async_setup_entry(hass, entry, async_add_entities):
     """Set up the CoinMarketCap sensors."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
     
+    symbols = coordinator.symbols.split(',')
+    # Get enabled sensors from options or fallback to default
+    enabled_sensors = entry.options.get(CONF_SHOW_SENSORS, entry.data.get(CONF_SHOW_SENSORS, DEFAULT_SENSORS))
+    
     entities = []
-    for symbol in coordinator.symbols.split(','):
-        entities.append(CoinMarketCapSensor(coordinator, symbol, "price"))
-        entities.append(CoinMarketCapSensor(coordinator, symbol, "percent_change_24h"))
+    for symbol in symbols:
+        for sensor_type in enabled_sensors:
+            if sensor_type in SENSOR_TYPES:
+                entities.append(CoinMarketCapSensor(coordinator, symbol, sensor_type))
         
     async_add_entities(entities)
 
@@ -24,9 +29,15 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
         super().__init__(coordinator)
         self._symbol = symbol.upper()
         self._sensor_type = sensor_type
-        self._attr_name = f"CoinMarketCap {self._symbol} {sensor_type.replace('_', ' ').capitalize()}"
+        self._sensor_info = SENSOR_TYPES[sensor_type]
+        
+        self._attr_name = f"{self._symbol} {self._sensor_info['name']}"
         self._attr_unique_id = f"{DOMAIN}_{self._symbol}_{sensor_type}"
         self._entry_id = coordinator.config_entry.entry_id
+        
+        # Set icon if defined
+        if "icon" in self._sensor_info:
+            self._attr_icon = self._sensor_info["icon"]
 
     @property
     def device_info(self) -> DeviceInfo:
@@ -43,31 +54,41 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
         """Return the state of the sensor."""
         data = self.coordinator.data.get(self._symbol)
         if data:
-            if self._sensor_type == "price":
-                price = data['quote']['USD']['price']
-                return round(price, self.coordinator.decimals)
-            elif self._sensor_type == "percent_change_24h":
-                percent = data['quote']['USD']['percent_change_24h']
-                return round(percent, self.coordinator.decimals)
+            # Navigate schema: data['symbol'] -> [path]
+            # e.g. ['quote', 'USD', 'price']
+            value = data
+            for key in self._sensor_info["json_path"]:
+                value = value.get(key)
+                if value is None:
+                    return None
+            
+            # Formatting
+            if isinstance(value, (int, float)):
+                # Apply rounding to prices, percentages, and market cap/volume if it's a currency
+                # We simply apply to everything that is a number for consistency with the 'decimals' setting
+                # or strictly generally for price/% as requested.
+                # Let's apply it generally to floats to keep it clean.
+                return round(value, self.coordinator.decimals)
+            return value
+            
         return None
 
     @property
     def unit_of_measurement(self):
         """Return the unit of measurement."""
-        if self._sensor_type == "price":
-            return "$"
-        elif self._sensor_type == "percent_change_24h":
-            return "%"
-        return None
+        return self._sensor_info.get("unit")
 
     @property
     def extra_state_attributes(self):
         """Return the state attributes."""
+        # Attributes are now individual sensors, so we reduce this to standard attributes
+        # or we could keep providing all raw data? 
+        # Better: Provide only last_updated if available
         data = self.coordinator.data.get(self._symbol)
         if data:
+            quote = data.get('quote', {}).get('USD', {})
             return {
-                "market_cap": data['quote']['USD']['market_cap'],
-                "volume_24h": data['quote']['USD']['volume_24h'],
-                "last_updated": data['quote']['USD']['last_updated'],
+                "last_updated": quote.get('last_updated'),
+                "api_id": data.get('id')
             }
         return None
