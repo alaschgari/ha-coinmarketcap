@@ -1,5 +1,6 @@
 """Sensor platform for CoinMarketCap integration."""
 from homeassistant.components.sensor import SensorEntity
+from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
@@ -25,6 +26,17 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
         self._sensor_type = sensor_type
         self._attr_name = f"CoinMarketCap {self._symbol} {sensor_type.replace('_', ' ').capitalize()}"
         self._attr_unique_id = f"{DOMAIN}_{self._symbol}_{sensor_type}"
+        self._entry_id = coordinator.config_entry.entry_id
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        """Return device information about this entity."""
+        return DeviceInfo(
+            identifiers={(DOMAIN, self._entry_id)},
+            name="CoinMarketCap",
+            manufacturer="CoinMarketCap",
+            entry_type="service",
+        )
 
     @property
     def state(self):
