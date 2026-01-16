@@ -13,7 +13,15 @@ This custom integration for Home Assistant allows you to track cryptocurrency pr
 - Real-time price tracking in USD.
 - 24h percent change sensors.
 - Additional attributes like Market Cap and 24h Volume.
+- Global market metrics (BTC/ETH Dominance, Total Market Cap).
+- Fear & Greed Index sentiment tracking.
 - Easy configuration via Home Assistant UI.
+
+## Supported API Endpoints
+This integration utilizes the following CoinMarketCap Professional API endpoints:
+- **Quotes Latest**: `/v1/cryptocurrency/quotes/latest` (Price, Volume, Market Cap)
+- **Global Metrics Latest**: `/v1/global-metrics/quotes/latest` (BTC/ETH Dominance, Total Market Cap)
+- **Fear & Greed Latest**: `/v3/fear-and-greed/latest` (Sentiment Index)
 
 ## Installation via HACS
 1. Open HACS in your Home Assistant instance.
