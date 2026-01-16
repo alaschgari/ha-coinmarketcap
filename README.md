@@ -5,6 +5,7 @@
 </p>
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-orange.svg)](https://www.buymeacoffee.com/alaschgari)
 
 This custom integration for Home Assistant allows you to track cryptocurrency prices and market data using the CoinMarketCap API.
 
