@@ -7,7 +7,7 @@ from homeassistant import config_entries
 from homeassistant.core import callback
 import homeassistant.helpers.config_validation as cv
 
-from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, CONF_SCAN_INTERVAL, API_URL, DEFAULT_SCAN_INTERVAL
+from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, CONF_SCAN_INTERVAL, CONF_DECIMALS, API_URL, DEFAULT_SCAN_INTERVAL, DEFAULT_DECIMALS
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -15,6 +15,7 @@ DATA_SCHEMA = vol.Schema({
     vol.Required(CONF_API_KEY): str,
     vol.Required(CONF_SYMBOLS, default="BTC,ETH"): str,
     vol.Optional(CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL): vol.All(cv.positive_int, vol.Range(min=60)),
+    vol.Optional(CONF_DECIMALS, default=DEFAULT_DECIMALS): vol.All(cv.positive_int, vol.Range(min=0)),
 })
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -76,6 +77,13 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
             step_id="init",
             data_schema=vol.Schema({
                 vol.Required(
+                    CONF_API_KEY,
+                    default=self._config_entry.options.get(
+                        CONF_API_KEY, 
+                        self._config_entry.data.get(CONF_API_KEY)
+                    ),
+                ): str,
+                vol.Required(
                     CONF_SYMBOLS,
                     default=self._config_entry.options.get(
                         CONF_SYMBOLS, 
@@ -89,5 +97,12 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                         self._config_entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
                     ),
                 ): vol.All(cv.positive_int, vol.Range(min=60)),
+                vol.Optional(
+                    CONF_DECIMALS,
+                    default=self._config_entry.options.get(
+                        CONF_DECIMALS, 
+                        self._config_entry.data.get(CONF_DECIMALS, DEFAULT_DECIMALS)
+                    ),
+                ): vol.All(cv.positive_int, vol.Range(min=0)),
             }),
         )

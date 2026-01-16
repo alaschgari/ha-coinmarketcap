@@ -44,7 +44,8 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
         data = self.coordinator.data.get(self._symbol)
         if data:
             if self._sensor_type == "price":
-                return data['quote']['USD']['price']
+                price = data['quote']['USD']['price']
+                return round(price, self.coordinator.decimals)
             elif self._sensor_type == "percent_change_24h":
                 return data['quote']['USD']['percent_change_24h']
         return None

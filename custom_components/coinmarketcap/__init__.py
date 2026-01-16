@@ -8,7 +8,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, CONF_SCAN_INTERVAL, API_URL, DEFAULT_SCAN_INTERVAL
+from .const import DOMAIN, CONF_API_KEY, CONF_SYMBOLS, CONF_SCAN_INTERVAL, CONF_DECIMALS, API_URL, DEFAULT_SCAN_INTERVAL, DEFAULT_DECIMALS
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -19,15 +19,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     session = aiohttp.ClientSession()
     
     # Use options if available, otherwise fallback to data
+    api_key = entry.options.get(CONF_API_KEY, entry.data[CONF_API_KEY])
     symbols = entry.options.get(CONF_SYMBOLS, entry.data[CONF_SYMBOLS])
     scan_interval = entry.options.get(CONF_SCAN_INTERVAL, entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL))
+    decimals = entry.options.get(CONF_DECIMALS, entry.data.get(CONF_DECIMALS, DEFAULT_DECIMALS))
 
     coordinator = CoinMarketCapDataUpdateCoordinator(
         hass,
         session,
-        api_key=entry.data[CONF_API_KEY],
+        api_key=api_key,
         symbols=symbols,
         scan_interval=scan_interval,
+        decimals=decimals,
     )
 
     await coordinator.async_config_entry_first_refresh()
@@ -57,11 +60,12 @@ async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
 class CoinMarketCapDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching CoinMarketCap data."""
 
-    def __init__(self, hass, session, api_key, symbols, scan_interval):
+    def __init__(self, hass, session, api_key, symbols, scan_interval, decimals):
         """Initialize the coordinator."""
         self.session = session
         self.api_key = api_key
         self.symbols = symbols.replace(" ", "")
+        self.decimals = decimals
         
         super().__init__(
             hass,
