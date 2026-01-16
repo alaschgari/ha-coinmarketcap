@@ -1,0 +1,44 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "CoinMarketCap Configuration",
+                "description": "Enter your CoinMarketCap API credentials and preferences.",
+                "data": {
+                    "api_key": "API Key",
+                    "symbols": "Symbols (e.g., BTC,ETH,SOL,ADA,DOT)",
+                    "scan_interval": "Update Interval (seconds, e.g., 300)"
+                },
+                "data_description": {
+                    "api_key": "Your Pro API Key (find it at pro.coinmarketcap.com)",
+                    "symbols": "Try combinations like 'BTC,ETH,SOL' or 'DOGE,SHIB,PEPE'",
+                    "scan_interval": "How often to poll the API (e.g., 60 for 1 min, 3600 for 1 hour)"
+                }
+            }
+        },
+        "options": {
+            "step": {
+                "init": {
+                    "title": "CoinMarketCap Options",
+                    "description": "Adjust your tracking preferences.",
+                    "data": {
+                        "symbols": "Symbols (e.g., BTC,ETH,SOL,ADA,DOT)",
+                        "scan_interval": "Update Interval (seconds, e.g., 300)"
+                    },
+                    "data_description": {
+                        "symbols": "Add more like 'BNB,XRP,LTC' or remove existing ones",
+                        "scan_interval": "Frequency of updates (e.g., 60, 300, 3600)"
+                    }
+                }
+            }
+        },
+        "error": {
+            "cannot_connect": "Failed to connect to CoinMarketCap API",
+            "invalid_auth": "Invalid API Key",
+            "unknown": "Unexpected error"
+        },
+        "abort": {
+            "already_configured": "Device is already configured"
+        }
+    }
+}

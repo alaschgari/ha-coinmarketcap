@@ -63,6 +63,10 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 class OptionsFlowHandler(config_entries.OptionsFlow):
     """Handle options flow for CoinMarketCap."""
 
+    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
+        """Initialize options flow."""
+        super().__init__(config_entry)
+
     async def async_step_init(self, user_input=None):
         """Manage the options."""
         if user_input is not None:
@@ -74,13 +78,15 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                 vol.Required(
                     CONF_SYMBOLS,
                     default=self.config_entry.options.get(
-                        CONF_SYMBOLS, self.config_entry.data.get(CONF_SYMBOLS)
+                        CONF_SYMBOLS, 
+                        self.config_entry.data.get(CONF_SYMBOLS, "BTC,ETH")
                     ),
                 ): str,
                 vol.Optional(
                     CONF_SCAN_INTERVAL,
                     default=self.config_entry.options.get(
-                        CONF_SCAN_INTERVAL, self.config_entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
+                        CONF_SCAN_INTERVAL, 
+                        self.config_entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
                     ),
                 ): vol.All(cv.positive_int, vol.Range(min=60)),
             }),
