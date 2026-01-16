@@ -12,7 +12,7 @@
                 "data_description": {
                     "api_key": "Dein Pro API Key (zu finden auf pro.coinmarketcap.com)",
                     "symbols": "Versuche Kombinationen wie 'BTC,ETH,SOL' oder 'DOGE,SHIB,PEPE'",
-                    "scan_interval": "Wie oft die API abgefragt wird (z.B. 60 für 1 Min, 3600 für 1 Std)"
+                    "scan_interval": "Intervall in Sekunden, wie oft die API abgefragt wird (z.B. 300 = 5 Minuten)"
                 }
             }
         },
@@ -27,7 +27,7 @@
                     },
                     "data_description": {
                         "symbols": "Füge weitere hinzu wie 'BNB,XRP,LTC' oder entferne vorhandene",
-                        "scan_interval": "Häufigkeit der Updates (z.B. 60, 300, 3600)"
+                        "scan_interval": "Intervall in Sekunden (z.B. 60, 300, 3600)"
                     }
                 }
             }
