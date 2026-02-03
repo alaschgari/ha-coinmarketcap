@@ -158,7 +158,7 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
         if category == "symbol" and self._symbol:
             data = self.coordinator.data.get('symbols', {}).get(self._symbol)
             if data:
-                quote = data.get('quote', {}).get('USD', {})
+                quote = data.get('quote', {}).get(self.coordinator.currency, {})
                 return {
                     "last_updated": quote.get('last_updated'),
                     "api_id": data.get('id'),
