@@ -1,7 +1,6 @@
 {
     "domain": "coinmarketcap",
     "name": "CoinMarketCap",
-    "description": "Track cryptocurrency prices, global metrics, and API health. Requires a Pro API Key from coinmarketcap.com/api/.",
     "documentation": "https://github.com/alaschgari/ha-coinmarketcap",
     "issue_tracker": "https://github.com/alaschgari/ha-coinmarketcap/issues",
     "dependencies": [],
@@ -14,5 +13,5 @@
     "loggers": [
         "custom_components.coinmarketcap"
     ],
-    "version": "1.6.6"
+    "version": "1.6.7"
 }

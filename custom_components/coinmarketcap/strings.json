@@ -3,7 +3,7 @@
         "step": {
             "user": {
                 "title": "CoinMarketCap Configuration",
-                "description": "Configure your CoinMarketCap integration. Need an API Key? Get one for free at [pro.coinmarketcap.com](https://pro.coinmarketcap.com/account/).",
+                "description": "Configure your CoinMarketCap integration. Need an API Key? Get one for free at the CoinMarketCap developer portal.",
                 "data": {
                     "api_key": "API Key",
                     "symbols": "Cryptocurrencies (Symbols)",
@@ -51,14 +51,5 @@
                 }
             }
         }
-    },
-    "error": {
-        "cannot_connect": "Failed to connect to CoinMarketCap API",
-        "invalid_auth": "Invalid API Key",
-        "unknown": "Unexpected error"
-    },
-    "abort": {
-        "already_configured": "Device is already configured",
-        "reauth_successful": "Re-authentication was successful"
     }
 }
