@@ -30,8 +30,7 @@ SENSOR_TYPES = {
         "unit": "{currency_symbol}",
         "icon": "mdi:cash",
         "category": "symbol",
-        "device_class": "monetary",
-        "state_class": "measurement"
+        "device_class": "monetary"
     },
     "percent_change_1h": {
         "name": "1h Change",
@@ -71,8 +70,7 @@ SENSOR_TYPES = {
         "unit": "{currency_symbol}",
         "icon": "mdi:chart-bar",
         "category": "symbol",
-        "device_class": "monetary",
-        "state_class": "measurement"
+        "device_class": "monetary"
     },
     "volume_change_24h": {
         "name": "Volume Change 24h",
@@ -88,8 +86,7 @@ SENSOR_TYPES = {
         "unit": "{currency_symbol}",
         "icon": "mdi:chart-pie",
         "category": "symbol",
-        "device_class": "monetary",
-        "state_class": "measurement"
+        "device_class": "monetary"
     },
     "market_cap_dominance": {
         "name": "Market Cap Dominance",
@@ -159,8 +156,7 @@ SENSOR_TYPES = {
         "unit": "{currency_symbol}",
         "icon": "mdi:earth",
         "category": "global",
-        "device_class": "monetary",
-        "state_class": "measurement"
+        "device_class": "monetary"
     },
     "total_volume_24h": {
         "name": "Total Volume 24h",
@@ -168,8 +164,7 @@ SENSOR_TYPES = {
         "unit": "{currency_symbol}",
         "icon": "mdi:chart-line-variant",
         "category": "global",
-        "device_class": "monetary",
-        "state_class": "measurement"
+        "device_class": "monetary"
     },
     
     # Fear & Greed Index
