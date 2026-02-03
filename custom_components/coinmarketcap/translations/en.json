@@ -18,47 +18,47 @@
                     "decimals": "Number of decimal places for prices and percentage changes.",
                     "show_sensors": "Select which data points you want to see. Global metrics and API usage are shared across all symbols."
                 }
-            }
-        },
-        "options": {
-            "step": {
-                "init": {
-                    "title": "CoinMarketCap Settings",
-                    "description": "Update your CoinMarketCap configuration and tracking preferences.",
-                    "data": {
-                        "api_key": "API Key",
-                        "symbols": "Cryptocurrencies (Symbols)",
-                        "scan_interval": "Refresh Interval",
-                        "decimals": "Decimals (Price & %)",
-                        "currency": "Currency (USD, EUR, ...)",
-                        "show_sensors": "Select Sensors to Track"
-                    },
-                    "data_description": {
-                        "api_key": "Your Pro API Key (find it at pro.coinmarketcap.com)",
-                        "symbols": "Try combinations like 'BTC,ETH,SOL' or 'DOGE,SHIB,PEPE'",
-                        "scan_interval": "Interval in seconds between API updates (e.g., 300 = 5 minutes)",
-                        "decimals": "Number of decimal places to display (e.g., 2)",
-                        "currency": "Preferred currency for valuation (e.g., USD or EUR)",
-                        "show_sensors": "Choose which data points you want to see for each symbol"
-                    }
-                },
-                "reauth_confirm": {
-                    "title": "Re-authenticate",
-                    "description": "Your API Key is no longer valid. Please enter a new one.",
-                    "data": {
-                        "api_key": "API Key"
-                    }
+            },
+            "reauth_confirm": {
+                "title": "Re-authenticate",
+                "description": "Your API Key is no longer valid. Please enter a new one.",
+                "data": {
+                    "api_key": "API Key"
                 }
             }
-        },
-        "error": {
-            "cannot_connect": "Failed to connect to CoinMarketCap API",
-            "invalid_auth": "Invalid API Key",
-            "unknown": "Unexpected error"
-        },
-        "abort": {
-            "already_configured": "Device is already configured",
-            "reauth_successful": "Re-authentication was successful"
         }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "CoinMarketCap Settings",
+                "description": "Update your CoinMarketCap configuration and tracking preferences.",
+                "data": {
+                    "api_key": "API Key",
+                    "symbols": "Cryptocurrencies (Symbols)",
+                    "scan_interval": "Refresh Interval",
+                    "decimals": "Decimals (Price & %)",
+                    "currency": "Currency (USD, EUR, ...)",
+                    "show_sensors": "Select Sensors to Track"
+                },
+                "data_description": {
+                    "api_key": "Your Pro API Key (find it at pro.coinmarketcap.com)",
+                    "symbols": "Try combinations like 'BTC,ETH,SOL' or 'DOGE,SHIB,PEPE'",
+                    "scan_interval": "Interval in seconds between API updates (e.g., 300 = 5 minutes)",
+                    "decimals": "Number of decimal places to display (e.g., 2)",
+                    "currency": "Preferred currency for valuation (e.g., USD or EUR)",
+                    "show_sensors": "Choose which data points you want to see for each symbol"
+                }
+            }
+        }
+    },
+    "error": {
+        "cannot_connect": "Failed to connect to CoinMarketCap API",
+        "invalid_auth": "Invalid API Key",
+        "unknown": "Unexpected error"
+    },
+    "abort": {
+        "already_configured": "Device is already configured",
+        "reauth_successful": "Re-authentication was successful"
     }
 }
