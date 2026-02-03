@@ -14,5 +14,5 @@
     "loggers": [
         "custom_components.coinmarketcap"
     ],
-    "version": "1.6.2"
+    "version": "1.6.3"
 }

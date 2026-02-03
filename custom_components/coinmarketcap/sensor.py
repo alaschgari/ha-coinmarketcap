@@ -76,7 +76,12 @@ class CoinMarketCapSensor(CoordinatorEntity, SensorEntity):
         if "state_class" in self._sensor_info:
             self._attr_state_class = self._sensor_info["state_class"]
         if "entity_category" in self._sensor_info:
-            self._attr_entity_category = self._sensor_info["entity_category"]
+            if self._sensor_info["entity_category"] == "diagnostic":
+                self._attr_entity_category = EntityCategory.DIAGNOSTIC
+            elif self._sensor_info["entity_category"] == "config":
+                self._attr_entity_category = EntityCategory.CONFIG
+            else:
+                self._attr_entity_category = self._sensor_info["entity_category"]
 
     @property
     def device_info(self) -> DeviceInfo:
