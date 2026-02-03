@@ -1,17 +1,17 @@
 {
     "domain": "coinmarketcap",
     "name": "CoinMarketCap",
-    "documentation": "https://github.com/alaschgari/ha-coinmarketcap",
-    "issue_tracker": "https://github.com/alaschgari/ha-coinmarketcap/issues",
-    "dependencies": [],
     "codeowners": [
         "@alaschgari"
     ],
     "config_flow": true,
-    "iot_class": "cloud_polling",
+    "dependencies": [],
+    "documentation": "https://github.com/alaschgari/ha-coinmarketcap",
     "integration_type": "service",
+    "iot_class": "cloud_polling",
+    "issue_tracker": "https://github.com/alaschgari/ha-coinmarketcap/issues",
     "loggers": [
         "custom_components.coinmarketcap"
     ],
-    "version": "1.6.8"
+    "version": "1.6.9"
 }
